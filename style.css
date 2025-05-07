@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #111;
+}
+
+.centered img {
+  max-width: 80%;
+  height: auto;
+  border: 5px solid white;
+  border-radius: 10px;
+}
