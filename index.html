@@ -25,7 +25,7 @@
       data.forEach(post => {
         if (post.large_file_url) {
           const img = document.createElement("img");
-          img.src = `https://danbooru.donmai.us${post.large_file_url}`;
+          img.src = `https://corsproxy.io/?https://danbooru.donmai.us${post.large_file_url}`;
           gallery.appendChild(img);
         }
       });
