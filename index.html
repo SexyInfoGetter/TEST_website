@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Cool GIF</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Danbooru Miku Gallery</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; }
+    #gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px; }
+    img { max-width: 200px; border-radius: 8px; transition: transform 0.2s; }
+    img:hover { transform: scale(1.05); }
+  </style>
 </head>
 <body>
-  <div class="centered">
-    <img src="caption.gif" alt="Funny GIF">
-  </div>
+  <h1>Danbooru: Hatsune Miku Gallery</h1>
+  <div id="gallery">Loading...</div>
+
+  <script>
+    async function fetchDanbooruImages(tag = "hatsune_miku") {
+      const response = await fetch(`https://danbooru.donmai.us/posts.json?tags=rating:safe+${tag}&limit=12`);
+      const data = await response.json();
+
+      const gallery = document.getElementById("gallery");
+      gallery.innerHTML = "";
+
+      data.forEach(post => {
+        if (post.large_file_url) {
+          const img = document.createElement("img");
+          img.src = `https://danbooru.donmai.us${post.large_file_url}`;
+          gallery.appendChild(img);
+        }
+      });
+    }
+
+    fetchDanbooruImages();
+  </script>
 </body>
 </html>
